@@ -6,17 +6,40 @@
 
 <h1 class="top-performers-title" style="color:#4285F4">Gen-AI Study Jam <span>Top Performers</span></h1>
 
-<div class="top-profiles-container">
-  <div class="profile">
-    <img src="path_to_image_2" alt="Profile 2">
-    <p>Member 2</p>
-  </div>
-  <div class="profile">
-    <img src="path_to_image_1" alt="Profile 1">
-    <p>Member 1</p>
-  </div>
-  <div class="profile">
-    <img src="path_to_image_3" alt="Profile 3">
-    <p>Member 3</p>
-  </div>
+<div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
+
+        <div  *ngFor="let profile of topProfiles">
+          <div class="profile">
+          <img src="path_to_image_2" alt="Profile 2">
+          <p>{{ profile.username }}<br> {{ profile.email }}</p>
+          <p><br><a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a></p>
+          <p><br>{{ profile.badges }} Number of badges</p>
+          </div>
+        </div>
+</div>
+
+-------------------------------------------------------
+<h2>Top 3 Profiles</h2>
+
+
+<!-- Display a message if there are no top profiles -->
+<div *ngIf="topProfiles && topProfiles.length === 0">
+  No top profiles available.
+</div>
+
+<!-- Display the remaining profiles -->
+<h2>Remaining Profiles</h2>
+<div *ngIf="remainingProfiles && remainingProfiles.length > 0">
+  <ul>
+    <li *ngFor="let profile of remainingProfiles">
+      {{ profile.username }}, {{ profile.email }},
+      <a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a>,
+      {{ profile.badges }} Number of badges
+    </li>
+  </ul>
+</div>
+
+<!-- Display a message if there are no remaining profiles -->
+<div *ngIf="remainingProfiles && remainingProfiles.length === 0">
+  No remaining profiles available.
 </div>
