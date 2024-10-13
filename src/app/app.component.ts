@@ -1,4 +1,3 @@
-// app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Papa from 'papaparse';
@@ -19,10 +18,25 @@ export class AppComponent implements OnInit {
 
   topProfiles: UserProfile[] = [];
   remainingProfiles: UserProfile[] = [];
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.readCSV();
+    this.triggerPartyPopperAnimation(); // Call the function to trigger animation
+  }
+
+  // Function to trigger party popper animation on page load
+  triggerPartyPopperAnimation() {
+    const poppers = document.querySelectorAll('.popper');
+
+    poppers.forEach((popper, index) => {
+      const popperElement = popper as HTMLElement; // Cast to HTMLElement
+      // Delay the animation for each popper to create a staggered effect
+      setTimeout(() => {
+        popperElement.style.animation = 'party-popper 1s forwards'; // Apply the animation
+      }, index * 300); // Delay based on index (0s, 300ms, 600ms)
+    });
   }
 
   readCSV() {
@@ -41,9 +55,6 @@ export class AppComponent implements OnInit {
       header: true,
       skipEmptyLines: true,
       complete: (result) => {
-        // console.log('Parsed Data:', result.data);
-
-        // Create an array of UserProfile objects
         const profiles: UserProfile[] = result.data.map((row: any) => ({
           email: row['User Email'],
           username: row['User Name'],
@@ -53,8 +64,6 @@ export class AppComponent implements OnInit {
 
         // Sort the profiles by number of badges in descending order
         profiles.sort((a, b) => b.badges - a.badges);
-
-        console.log('Sorted Profiles:', profiles);
         this.topProfiles = profiles.slice(0, 3);
         this.remainingProfiles = profiles.slice(3);
       }
