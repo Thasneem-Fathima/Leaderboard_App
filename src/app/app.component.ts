@@ -69,4 +69,51 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  
+//logic for pagination:
+pg: number = 1; // Current page
+fetchPages: number = 15; // Default number of items per page
+
+get paginatedProfiles() {
+  const startIndex = (this.pg - 1) * this.fetchPages;
+  return this.remainingProfiles.slice(startIndex, startIndex + this.fetchPages);
+}
+
+onPageChange(event: Event): void {
+  const selectElement = event.target as HTMLSelectElement;
+  this.fetchPages = +selectElement.value; // Update items per page
+  this.pg = 1; // Reset to the first page
+}
+
+nextPage(): void {
+  if (this.pg < this.totalPages) {
+    this.pg++;
+  }
+}
+
+previousPage(): void {
+  if (this.pg > 1) {
+    this.pg--;
+  }
+}
+
+get totalPages() {
+  return Math.ceil(this.remainingProfiles.length / this.fetchPages);
+}
+
+// Generate an array of page numbers for pagination links
+get pageNumbers() {
+  const pages = [];
+  for (let i = 1; i <= this.totalPages; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+// Navigate to a specific page
+goToPage(page: number) {
+  this.pg = page;
+}
+//ends the logic for pagination
 }
