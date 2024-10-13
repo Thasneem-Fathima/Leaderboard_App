@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif; /* Ensure you have the Poppins font included */
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Year Buttons */
+.year-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.year-btn {
+  background-color: #ff6f20;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s; /* Animation effects */
+}
+
+.year-btn:hover {
+  background-color: #ff7f30; /* Slightly lighter on hover */
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+/* Title */
+.top-performers-title {
+  text-align: center;
+  font-size: 2.5em; /* Larger font size */
+  margin: 20px 0;
+  text-decoration: underline; /* Underline effect */
+}
+
+/* Top Profiles Container */
+.top-profiles-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Profiles */
+.top-profiles {
+  display: flex;
+  align-items: flex-start; /* Align profiles at the top */
+}
+
+.profile {
+  background-color: white; /* Card background */
+  border: 2px solid #ff6f20; /* Border color */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  padding: 20px;
+  margin: 0 10px; /* Space between profiles */
+  transition: transform 0.3s, box-shadow 0.3s; /* Animation effects */
+  text-align: center; /* Center text */
+  flex: 1; /* Equal size */
+}
+
+/* Profile Images */
+.profile img {
+  width: 100px; /* Fixed size for images */
+  height: 100px;
+  border-radius: 50%; /* Circular images */
+  margin-bottom: 10px;
+}
+
+/* Hover Effects for Profiles */
+.profile:hover {
+  transform: translateY(-10px); /* Lift effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .top-profiles {
+    flex-direction: column; /* Stack profiles vertically on smaller screens */
+  }
+}
