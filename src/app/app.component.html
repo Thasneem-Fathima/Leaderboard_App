@@ -8,14 +8,14 @@
 
 <div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
 
-        <div  *ngFor="let profile of topProfiles">
+        <ul  *ngFor="let profile of topProfiles">
           <div class="profile">
           <img src="path_to_image_2" alt="Profile 2">
           <p>{{ profile.username }}<br> {{ profile.email }}</p>
           <p><br><a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a></p>
           <p><br>{{ profile.badges }} Number of badges</p>
           </div>
-        </div>
+        </ul>
 </div>
 
 -------------------------------------------------------
