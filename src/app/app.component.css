@@ -1,0 +1,78 @@
+
+
+tr:hover{
+  cursor: pointer;
+  background-color: #c6a5ec;
+}
+
+th,td{
+    border-bottom: 3px solid black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+th{
+    padding:10px;
+    margin:2px;
+    background-color: slateblue;
+    color:whitesmoke;
+}
+td{
+    background-color: rgb(174, 247, 174);
+    font-size: medium;
+}
+td{
+    padding: 3px;
+    text-align: center;
+}
+
+.paginate{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+}
+/* this is pagination */
+#myDropdown{
+    border:1px solid black;
+    font-size: medium;
+    background-color: rgb(101, 137, 173);
+}
+
+
+#myDropdown:hover{
+    cursor: pointer;
+}
+
+.pagedrop{
+    font-family:'Times New Roman', Times, serif;
+    font-size: medium;
+    font-weight:normal;
+}
+.dropdowncont{
+    margin-bottom: 20px;
+
+}
+.cont{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.cont button{
+    border:1px solid black;
+    border-radius: 5px;
+    height: 25px;
+    margin: 5px;
+    background-color: lightgray;
+}
+.cont button:hover{
+   background-color: blue; 
+}
+
+.cont .prev{
+    font-weight: 400;
+    color: white;
+    background-color: green;
+}
+
+.cont .next{
+    font-weight: 300;
+    color: white;
+    background-color: blue;
+}
