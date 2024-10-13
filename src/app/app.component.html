@@ -1,0 +1,66 @@
+<h2>Top 3 Profiles</h2>
+<div *ngIf="topProfiles && topProfiles.length > 0">
+  <ul>
+    <li *ngFor="let profile of topProfiles">
+      {{ profile.username }}, {{ profile.email }},
+      <a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a>,
+      {{ profile.badges }} Number of badges
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="topProfiles && topProfiles.length === 0">
+  No top profiles available.
+</div>
+
+<h2>Remaining Profiles</h2>
+<div *ngIf="remainingProfiles && remainingProfiles.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>SkillsBoostProfile</th>
+        <th>Badges</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let profile of paginatedProfiles">
+        <td>{{ profile.username }}</td>
+        <td>{{ profile.email }}</td>
+        <td>
+          <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
+            <img src="assets/imageGDG.jpg" alt="Description of Image" width="25" height="25" />
+          </a>
+        </td>
+        <td>{{ profile.badges }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="dropdowncont">
+    <label for="myDropdown" class="pagedrop">Profiles per page:</label>
+    <select id="myDropdown" (change)="onPageChange($event)">
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+
+  <div class="cont">
+    <button class="prev" (click)="previousPage()" [disabled]="pg === 1">Previous</button>
+      <span *ngFor="let page of pageNumbers">
+        <div  *ngIf="(page > pg - 2 && page < pg + 2) || page === 1 || page === totalPages">
+          <button (click)="goToPage(page)" [class.active]="pg === page">{{ page }}</button>
+        </div>
+        <div   *ngIf="page === pg - 2 && pg > 3">...</div>
+        <div  *ngIf="page === pg + 2 && pg < totalPages - 2">...</div>
+      </span>
+    <button class="next" (click)="nextPage()" [disabled]="pg === totalPages">Next</button>
+  </div>
+</div>
+
+<div *ngIf="remainingProfiles && remainingProfiles.length === 0">
+  No remaining profiles available.
+</div> 
