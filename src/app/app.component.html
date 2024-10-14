@@ -22,6 +22,28 @@
 <div *ngIf="topProfiles && topProfiles.length === 0">
   No top profiles available.
 </div>
+
+<!--Search Functionality-->
+<div class="col-md-3 ms-auto">
+  <div class="input-group position-relative">
+    <input type="text" 
+          class="form-control" 
+          placeholder="Search"
+          [(ngModel)]="searchText"
+          (input)="filterProfiles()">
+    <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">X</button>
+  </div>
+</div>
+
+<!-- Last Updated Date -->
+<p style="background-color: #e0f7fa; color: #0d47a1; padding: 10px; border-radius: 5px;">
+  The leaderboard was last updated on 
+  <strong>{{ lastUpdatedDate }} 2024</strong>. 
+  <a href="https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-generative-ai-skill-badge" target="_blank">
+    More details about badges
+  </a>
+</p>
+
 <h2 align="center">Remaining Profiles</h2>
 <div *ngIf="remainingProfiles && remainingProfiles.length > 0">
   <table align="center">
