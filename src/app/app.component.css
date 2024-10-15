@@ -165,13 +165,12 @@ tbody tr {
 td {
     padding: 15px;
     font-size:large;
-    font-weight:bold !important;
+    
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     color: #333;
-    font-family:'Times New Roman', Times, serif;
-    font-weight: 500;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   
+    font-family:'Roboto', sans-serif;
     font-weight:lighter;
 }
 
