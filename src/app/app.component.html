@@ -1,3 +1,7 @@
+
+<div class="header">
+  <img src="assets/gdglogo.jpeg" alt="Logo">
+</div>
 <div class="year-icons">
   <button class="year-icon" style="background-color:#DB4437" >2024extd</button>
   <button class="year-icon" style="background-color:#F4B400">2024</button>
@@ -8,13 +12,14 @@
 
 <div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
 
-        <ul  *ngFor="let profile of topProfiles">
+        <ul  *ngFor="let profile of topProfiles" align="center">
           <div class="profile">
           <img src="path_to_image_2" alt="Profile 2">
-          <p>{{ profile.username }}<br> {{ profile.email }}</p>
-          <p><br><a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a></p>
-          <p><br>{{ profile.badges }} Number of badges</p>
+          <p>{{ profile.username }}</p>
           </div>
+          <p>{{ profile.email }}</p>
+          <p><a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a></p>
+          <p>{{ profile.badges }} Number of badges</p>
         </ul>
 </div>
 
@@ -22,9 +27,42 @@
 <div *ngIf="topProfiles && topProfiles.length === 0">
   No top profiles available.
 </div>
+
+<!--Search Functionality-->
+<div class="col-md-3 ms-auto" align="center">
+  <div  class="search-container">
+    <input type="text"  
+          class="form-control" 
+          placeholder="Search"
+          [(ngModel)]="searchText"
+          (input)="filterProfiles()">
+          
+    <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">X</button>
+  </div>
+</div>
+
+<!-- Last Updated Date -->
+<p style="background-color: #e0f7fa; color: #0d47a1; padding: 10px; border-radius: 5px;" align="center">
+  The leaderboard was last updated on 
+  <strong>{{ lastUpdatedDate }} 2024</strong>. 
+  <a href="https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-generative-ai-skill-badge" target="_blank">
+    More details about badges
+  </a>
+</p>
+
+
 <h2 align="center">Remaining Profiles</h2>
+<div class="dropdowncont" align="center">
+  <label for="myDropdown" class="pagedrop">Profiles per page:</label>
+  <select id="myDropdown" (change)="onPageChange($event)">
+    <option value="5">5</option>
+    <option value="15">15</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+  </select>
+</div>
 <div *ngIf="remainingProfiles && remainingProfiles.length > 0">
-  <table align="center">
+  <table>
     <thead>
       <tr>
         <th>UserName</th>
@@ -47,15 +85,6 @@
     </tbody>
   </table>
 
-  <div class="dropdowncont">
-    <label for="myDropdown" class="pagedrop">Profiles per page:</label>
-    <select id="myDropdown" (change)="onPageChange($event)">
-      <option value="5">5</option>
-      <option value="15">15</option>
-      <option value="25">25</option>
-      <option value="50">50</option>
-    </select>
-  </div>
 
   <div class="cont">
     <button class="prev" (click)="previousPage()" [disabled]="pg === 1">Previous</button>
