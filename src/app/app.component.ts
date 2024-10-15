@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.readCSV();
-    this.triggerPartyPopperAnimation(); // Call the function to trigger animation
+    this.triggerPartyPopperAnimation();
+    this.extractLastUpdatedDate();
   }
   clearSearch(){
     this.searchText='';
@@ -48,9 +49,9 @@ export class AppComponent implements OnInit {
   }
 
   readCSV() {
-    const fileName = 'Madras Institute of Technology - Chennai, India [07 Oct].csv'; // The filename with the date
-    this.extractLastUpdatedDate(fileName);
-    this.http.get('assets/Madras Institute of Technology - Chennai, India [07 Oct].csv', { responseType: 'text' }).subscribe(
+    const fileName = 'GenAI.csv';
+    // this.extractLastUpdatedDate(fileName);
+    this.http.get('assets/GenAI.csv', { responseType: 'text' }).subscribe(
       data => {
         this.parseCSV(data);
       },
@@ -80,7 +81,7 @@ export class AppComponent implements OnInit {
         this.swappedProfiles[0] = this.swappedProfiles[1];
         this.swappedProfiles[1] = temp;
 
-        
+
         this.remainingProfiles = profiles.slice(3);
         this.filteredProfiles = [...this.remainingProfiles];
         this.filterProfiles();
@@ -88,13 +89,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  extractLastUpdatedDate(fileName: string) {
-    const dateRegex = /\[(.*?)\]/; // Regex to capture the date inside brackets
-    const match = fileName.match(dateRegex);
-
-    if (match && match[1]) {
-      this.lastUpdatedDate = match[1]; // Store the extracted date
-    }
+  extractLastUpdatedDate() {
+    this.http.get<{ buildDate: string }>('assets/build-metadata.json')
+      .subscribe(
+        data => {
+          const date = new Date(data.buildDate);
+          this.lastUpdatedDate = date.toLocaleString();
+        },
+        error => {
+          console.error('Error loading build date:', error);
+        }
+      );
   }
 
   filterProfiles() {
