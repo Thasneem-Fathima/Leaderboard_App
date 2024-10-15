@@ -8,7 +8,7 @@
 
 .header img {
     height: 200px; /* Adjust the logo size */
-    
+
 }
 .year-icons {
   display: flex;
@@ -87,10 +87,45 @@
   border: none; /* No border */
 }
 
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d47a1; /* Blue background */
+  color: white; /* Text color */
+  border-radius: 50%; /* Make it round */
+  font-size: 3em; /* Adjust font size */
+  font-weight: bold; /* Make the letter bold */
+}
+
+
+.highlight-profile {
+  transform: translateY(-25px); /* Move the profile slightly upward */
+  position: relative; /* To ensure it maintains its position within the flow */
+}
+
+.profile {
+  margin: 10px 0; /* Add some margin to space out the profiles */
+}
+
+
+.profile-details {
+  display: flex; /* Use flex to align items side by side */
+  gap: 20px; /* Add some space between the email and skills sections */
+  align-items: center; /* Vertically center the icons */
+}
+
+.email-section,
+.skills-section {
+  display: flex;
+  align-items: center;
+}
+
+
 /* Image styling */
 .profile img {
-  width: 120px;
-  height: 120px;
+  /* width: 120px;
+  height: 120px; */
   border-radius: 40%;
   margin-bottom: 10px;
   transition: transform 0.4s ease;
@@ -165,11 +200,11 @@ tbody tr {
 td {
     padding: 15px;
     font-size:large;
-    
+
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
     color: #333;
-   
+
     font-family:'Roboto', sans-serif;
     font-weight:lighter;
 }
@@ -191,39 +226,40 @@ tr:hover {
 }
 
 /* Pagination section */
+
 .cont {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
 }
 
 .cont button {
-    padding: 10px 16px;
-    border-radius: 50px;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  padding: 10px 16px;
+  border-radius: 50px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .cont button:hover {
-    background-color: #34a853;
-    transform: scale(1.1);
+  background-color: #34a853;
+  transform: scale(1.1);
 }
 
 .cont button:disabled {
-    background-color: #d9e2f7;
-    color: #666;
-    cursor: not-allowed;
+  background-color: #d9e2f7;
+  color: #666;
+  cursor: not-allowed;
 }
 
 /* Dropdown styling */
 #myDropdown {
     padding: 8px;
-    background-color: #34a853;
+    background-color: #0d47a1;
     color: white;
     font-size: 1.1em;
     border-radius: 5px;
@@ -233,7 +269,7 @@ tr:hover {
 
 
 #myDropdown:hover {
-    background-color: #66bb6a;
+    background-color: #0d47a1;
 }
 
 /* General animation for fade-in */

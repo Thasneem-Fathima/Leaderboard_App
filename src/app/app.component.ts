@@ -17,6 +17,7 @@ interface UserProfile {
 export class AppComponent implements OnInit {
 
   topProfiles: UserProfile[] = [];
+  swappedProfiles: UserProfile[] = [];
   remainingProfiles: UserProfile[] = [];
   filteredProfiles: UserProfile[] = [];
   searchText: string='';
@@ -74,6 +75,12 @@ export class AppComponent implements OnInit {
         // Sort the profiles by number of badges in descending order
         profiles.sort((a, b) => b.badges - a.badges);
         this.topProfiles = profiles.slice(0, 3);
+        this.swappedProfiles = [...this.topProfiles];
+        const temp = this.swappedProfiles[0];
+        this.swappedProfiles[0] = this.swappedProfiles[1];
+        this.swappedProfiles[1] = temp;
+
+        
         this.remainingProfiles = profiles.slice(3);
         this.filteredProfiles = [...this.remainingProfiles];
         this.filterProfiles();
@@ -84,7 +91,7 @@ export class AppComponent implements OnInit {
   extractLastUpdatedDate(fileName: string) {
     const dateRegex = /\[(.*?)\]/; // Regex to capture the date inside brackets
     const match = fileName.match(dateRegex);
-    
+
     if (match && match[1]) {
       this.lastUpdatedDate = match[1]; // Store the extracted date
     }
@@ -108,7 +115,7 @@ export class AppComponent implements OnInit {
 
  //logic for pagination:
  pg: number = 1; // Current page
- fetchPages: number = 15; // Default number of items per page
+ fetchPages: number = 5; // Default number of items per page
 
  get paginatedProfiles() {
    const startIndex = (this.pg - 1) * this.fetchPages;

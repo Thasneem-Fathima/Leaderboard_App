@@ -2,25 +2,40 @@
 <div class="header">
   <img src="assets/gdglogo.jpeg" alt="Logo">
 </div>
-<div class="year-icons">
+<!-- <div class="year-icons">
   <button class="year-icon" style="background-color:#DB4437" >2024extd</button>
   <button class="year-icon" style="background-color:#F4B400">2024</button>
   <button class="year-icon" style="background-color:#0F9D58">2023</button>
-</div>
+</div> -->
 
 <h1 class="top-performers-title" style="color:#4285F4">Gen-AI Study Jam <span>Top Performers</span></h1>
 
 <div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
 
-        <ul  *ngFor="let profile of topProfiles" align="center">
-          <div class="profile">
-          <img src="path_to_image_2" alt="Profile 2">
-          <p>{{ profile.username }}</p>
-          </div>
-          <p>{{ profile.email }}</p>
-          <p><a [href]="profile.skillsBoostUrl" target="_blank">Skills Boost Profile</a></p>
-          <p>{{ profile.badges }} Number of badges</p>
-        </ul>
+  <ul *ngFor="let profile of swappedProfiles; let i = index" align="center">
+    <div class="profile" [ngClass]="{'highlight-profile': i === 1}">
+      <div class="profile-icon" [style.width]="i === 1 ? '170px' : '100px'"
+         [style.height]="i === 1 ? '170px' : '100px'">
+      <span>{{ profile.username.charAt(0).toUpperCase() }}</span>
+    </div>
+      <p>{{ profile.username }}</p>
+      <div class="profile-details">
+        <div class="email-section">
+          <a [href]="'mailto:' + profile.email" target="_blank" rel="noopener noreferrer">
+            <img src="assets/gmail.png" alt="Email" style="width: 30px; height: 30px;" />
+          </a>
+        </div>
+        <div class="skills-section">
+          <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
+            <img src="assets/imageGDG.jpg" alt="SkillsBoostURL" style="width: 30px; height: 30px;" />
+          </a>
+        </div>
+      </div>
+      <p>Badges: {{ profile.badges }}</p>
+    </div>
+  </ul>
+
+
 </div>
 
 <!-- Display a message if there are no top profiles -->
@@ -31,29 +46,29 @@
 <!--Search Functionality-->
 <div class="col-md-3 ms-auto" align="center">
   <div  class="search-container">
-    <input type="text"  
-          class="form-control" 
+    <input type="text"
+          class="form-control"
           placeholder="Search"
           [(ngModel)]="searchText"
           (input)="filterProfiles()">
-          
+
     <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">X</button>
   </div>
 </div>
 
 <!-- Last Updated Date -->
 <p style="background-color: #e0f7fa; color: #0d47a1; padding: 10px; border-radius: 5px;" align="center">
-  The leaderboard was last updated on 
-  <strong>{{ lastUpdatedDate }} 2024</strong>. 
+  The leaderboard was last updated on
+  <strong>{{ lastUpdatedDate }} 2024</strong>.
   <a href="https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-generative-ai-skill-badge" target="_blank">
     More details about badges
   </a>
 </p>
 
 
-<h2 align="center">Remaining Profiles</h2>
+<!-- <h2 align="center">Remaining Profiles</h2> -->
 <div class="dropdowncont" align="center">
-  <label for="myDropdown" class="pagedrop">Profiles per page:</label>
+  <label for="myDropdown" class="pagedrop">Profiles per page: </label>
   <select id="myDropdown" (change)="onPageChange($event)">
     <option value="5">5</option>
     <option value="15">15</option>
@@ -61,6 +76,8 @@
     <option value="50">50</option>
   </select>
 </div>
+
+
 <div *ngIf="remainingProfiles && remainingProfiles.length > 0">
   <table>
     <thead>
@@ -77,7 +94,7 @@
         <td>{{ profile.email }}</td>
         <td>
           <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
-            <img src="assets/imageGDG.jpg" alt="Description of Image" width="25" height="25" />
+            <img src="assets/imageGDG.jpg" alt="SkillsBoostURL" width="25" height="25" />
           </a>
         </td>
         <td>{{ profile.badges }}</td>
@@ -85,20 +102,22 @@
     </tbody>
   </table>
 
-
   <div class="cont">
     <button class="prev" (click)="previousPage()" [disabled]="pg === 1">Previous</button>
       <span *ngFor="let page of pageNumbers">
         <div  *ngIf="(page > pg - 2 && page < pg + 2) || page === 1 || page === totalPages">
-          <button (click)="goToPage(page)" [class.active]="pg === page">{{ page }}</button>
+          <button (click)="goToPage(page)" [class.active]="pg === page" [disabled]="pg === page">{{ page }}</button>
         </div>
         <div   *ngIf="page === pg - 2 && pg > 3">...</div>
         <div  *ngIf="page === pg + 2 && pg < totalPages - 2">...</div>
       </span>
+
+
     <button class="next" (click)="nextPage()" [disabled]="pg === totalPages">Next</button>
   </div>
 </div>
 
 <div *ngIf="remainingProfiles && remainingProfiles.length === 0">
   No remaining profiles available.
-</div> 
+</div>
+
