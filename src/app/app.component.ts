@@ -7,6 +7,7 @@ interface UserProfile {
   username: string;
   skillsBoostUrl: string;
   badges: number;
+  rank:number
 }
 
 @Component({
@@ -70,11 +71,15 @@ export class AppComponent implements OnInit {
           email: row['User Email'],
           username: row['User Name'],
           skillsBoostUrl: row['Google Cloud Skills Boost Profile URL'],
-          badges: parseInt(row['# of Skill Badges Completed'], 10) || 0 // Convert badges to number
+          badges: parseInt(row['# of Skill Badges Completed'], 10) || 0,
+          rank:0
         }));
 
         // Sort the profiles by number of badges in descending order
         profiles.sort((a, b) => b.badges - a.badges);
+        profiles.forEach((profile, index) => {
+          profile.rank = index + 1; // This will give a rank to every profile based on their position after sorting
+        });
         this.topProfiles = profiles.slice(0, 3);
         this.swappedProfiles = [...this.topProfiles];
         const temp = this.swappedProfiles[0];
