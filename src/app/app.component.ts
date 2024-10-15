@@ -94,7 +94,21 @@ export class AppComponent implements OnInit {
       .subscribe(
         data => {
           const date = new Date(data.buildDate);
-          this.lastUpdatedDate = date.toLocaleString();
+          const formattedDate = date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+
+          // Format the time (e.g., 06:30 PM)
+          const formattedTime = date.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+
+          // Combine date and time
+          this.lastUpdatedDate = `${formattedDate}, ${formattedTime}`;
         },
         error => {
           console.error('Error loading build date:', error);
