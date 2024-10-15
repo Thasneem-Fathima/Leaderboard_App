@@ -181,11 +181,10 @@ th {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1.5px;
-    background-color: #1a73e8; /* More vibrant header color */
-    border-bottom: 4px solid #34a853; /* Adding green border for contrast */
+    background-color: #1a73e8;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    border-right: 1px solid #fff; /* Separator between columns */
+    border-right: 1px solid #fff;
 }
 
 th:last-child {
@@ -246,7 +245,7 @@ tr:hover {
 }
 
 .cont button:hover {
-  background-color: #34a853;
+  background-color: #1a73e8;
   transform: scale(1.1);
 }
 
