@@ -208,6 +208,30 @@ td {
     font-weight:lighter;
 }
 
+.status-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.status-icon.green {
+  color: green;
+  border-color: green;
+}
+
+.status-icon.red {
+  color: red;
+  border-color: red;
+}
+
+/* tr.highlight-row {
+  background-color: yellow !important;
+} */
+
 
 tr:nth-child(even) {
     background-color: #f1f3f4;
@@ -331,3 +355,30 @@ tbody tr:hover td {
 .search-container input[type="text"]::placeholder {
     color: #757575;
 }
+
+/* Centering the countdown section */
+#countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  text-align: center;
+}
+
+#countdown {
+  background-color: #f0f8ff;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  color: #333;
+}
+
+
+#countdown span {
+  font-weight: bold;
+  color: #007BFF;
+}
+
+
+

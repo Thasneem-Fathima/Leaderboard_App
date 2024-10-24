@@ -8,9 +8,9 @@
   <button class="year-icon" style="background-color:#0F9D58">2023</button>
 </div> -->
 
-<h1 class="top-performers-title" style="color:#4285F4">Gen-AI Study Jam <span>Top Performers</span></h1>
+<h1 class="top-performers-title" style="color:#4285F4">Gen-AI Study Jam <span>LeaderBoard</span></h1>
 
-<div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
+<!-- <div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
 
   <ul *ngFor="let profile of swappedProfiles; let i = index" align="center">
     <div class="profile" [ngClass]="{'highlight-profile': i === 1}">
@@ -37,14 +37,18 @@
       <p>Badges: {{ profile.badges }}</p>
     </div>
   </ul>
+</div> -->
 
-
-</div>
-
-<!-- Display a message if there are no top profiles -->
-<div *ngIf="topProfiles && topProfiles.length === 0">
+<!-- <div *ngIf="topProfiles && topProfiles.length === 0">
   No top profiles available.
+</div> -->
+
+<div id="countdown-container">
+  <div id="countdown">
+    Ends in: <span>{{ days }}d {{ hours }}h {{ minutes }}m {{ seconds }}s</span>
+  </div>
 </div>
+
 
 <!--Search Functionality-->
 <div class="col-md-3 ms-auto" align="center">
@@ -63,8 +67,11 @@
 <p style="background-color: #e0f7fa; color: #0d47a1; padding: 10px; border-radius: 5px;" align="center">
   The leaderboard was last updated on
   <strong>{{ lastUpdatedDate }}</strong>.
-  <a href="https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-generative-ai-skill-badge" target="_blank">
-    More details about badges
+  <a
+    href="https://docs.google.com/spreadsheets/d/1RUSKNkScB3duXkP2TpIPuOHuPuwjnrvOFSn34HTrOFE/edit?gid=0#gid=0"
+    target="_blank"
+  >
+    Click here to view Course Schedule
   </a>
 </p>
 
@@ -81,7 +88,7 @@
 </div>
 
 
-<div *ngIf="remainingProfiles && remainingProfiles.length > 0">
+<div *ngIf="ProfilesList && ProfilesList.length > 0">
   <table>
     <thead>
       <tr>
@@ -90,10 +97,12 @@
         <th>Email</th>
         <th>SkillsBoostProfile</th>
         <th>Badges</th>
+        <th>Arcade Game Completion Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let profile of paginatedProfiles">
+      <!-- <tr *ngFor="let profile of paginatedProfiles" [ngClass]="{'highlight-row': profile.arcade_status === 1 && profile.badges === 15}"> -->
+      <tr *ngFor="let profile of paginatedProfiles" [ngClass]="{'highlight-row': profile.arcade_status === 1 && profile.badges === 15}">
         <td>{{ profile.rank }}</td>
         <td>{{ profile.username }}</td>
         <td>{{ profile.email }}</td>
@@ -103,6 +112,18 @@
           </a>
         </td>
         <td>{{ profile.badges }}</td>
+        <td>
+          <ng-container *ngIf="profile.arcade_status === 1; else redTick">
+            <span class="status-icon green">
+              &#x2714;
+            </span>
+          </ng-container>
+          <ng-template #redTick>
+            <span class="status-icon red">
+              &#x2718;
+            </span>
+          </ng-template>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -122,7 +143,7 @@
   </div>
 </div>
 
-<div *ngIf="remainingProfiles && remainingProfiles.length === 0">
-  No remaining profiles available.
+<div *ngIf="ProfilesList && ProfilesList.length === 0">
+  No profiles available.
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Papa from 'papaparse';
 
@@ -7,6 +7,7 @@ interface UserProfile {
   username: string;
   skillsBoostUrl: string;
   badges: number;
+  arcade_status: number;
   rank:number
 }
 
@@ -17,16 +18,26 @@ interface UserProfile {
 })
 export class AppComponent implements OnInit {
 
-  topProfiles: UserProfile[] = [];
-  swappedProfiles: UserProfile[] = [];
-  remainingProfiles: UserProfile[] = [];
+  ProfilesList: UserProfile[] = [];
+  // topProfiles: UserProfile[] = [];
+  // swappedProfiles: UserProfile[] = [];
+  // remainingProfiles: UserProfile[] = [];
   filteredProfiles: UserProfile[] = [];
   searchText: string='';
   lastUpdatedDate: string='';
 
+  days: number = 0;
+  hours: number = 0;
+  minutes: number = 0;
+  seconds: number = 0;
+  interval: any;
+  eventTime = new Date('November 1, 2024 17:00:00 GMT+0530').getTime();
+
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.startCountdown();
     this.readCSV();
     this.triggerPartyPopperAnimation();
     this.extractLastUpdatedDate();
@@ -72,23 +83,49 @@ export class AppComponent implements OnInit {
           username: row['User Name'],
           skillsBoostUrl: row['Google Cloud Skills Boost Profile URL'],
           badges: parseInt(row['# of Skill Badges Completed'], 10) || 0,
+          arcade_status: parseInt(row['# of Arcade Games Completed'], 10),
           rank:0
         }));
 
-        // Sort the profiles by number of badges in descending order
-        profiles.sort((a, b) => b.badges - a.badges);
-        profiles.forEach((profile, index) => {
-          profile.rank = index + 1; // This will give a rank to every profile based on their position after sorting
+        // profiles.sort((a, b) => b.badges - a.badges);
+        profiles.sort((a, b) => {
+          // Sort by badges first
+          if (b.badges !== a.badges) {
+            return b.badges - a.badges; // Descending order for badges
+          }
+
+          // If badges are the same, prioritize arcade_status
+          return b.arcade_status - a.arcade_status; // Descending order for arcade_status (1 comes before 0)
         });
-        this.topProfiles = profiles.slice(0, 3);
-        this.swappedProfiles = [...this.topProfiles];
-        const temp = this.swappedProfiles[0];
-        this.swappedProfiles[0] = this.swappedProfiles[1];
-        this.swappedProfiles[1] = temp;
+        // profiles.forEach((profile, index) => {
+        //   profile.rank = index + 1;
+        // });
+        let currentRank = 1;
+        let lastBadges = null;
+        let lastArcadeStatus = null;
+
+        for (let i = 0; i < profiles.length; i++) {
+          const profile = profiles[i];
+
+          if (profile.badges !== lastBadges || profile.arcade_status !== lastArcadeStatus) {
+            currentRank = i + 1; 
+            lastBadges = profile.badges;
+            lastArcadeStatus = profile.arcade_status;
+          }
+
+          profile.rank = currentRank;
+        }
+        // this.topProfiles = profiles.slice(0, 3);
+        // this.swappedProfiles = [...this.topProfiles];
+        // const temp = this.swappedProfiles[0];
+        // this.swappedProfiles[0] = this.swappedProfiles[1];
+        // this.swappedProfiles[1] = temp;
 
 
-        this.remainingProfiles = profiles.slice(3);
-        this.filteredProfiles = [...this.remainingProfiles];
+        // this.remainingProfiles = profiles.slice(3);
+        // this.filteredProfiles = [...this.remainingProfiles];
+        this.ProfilesList=profiles;
+        this.filteredProfiles = [...this.ProfilesList];
         this.filterProfiles();
       }
     });
@@ -123,10 +160,10 @@ export class AppComponent implements OnInit {
 
   filterProfiles() {
     if (!this.searchText) {
-        this.filteredProfiles = this.remainingProfiles;
+        this.filteredProfiles = this.ProfilesList;
     } else {
         const lowerCaseSearchText = this.searchText.toLowerCase();
-        this.filteredProfiles = this.remainingProfiles.filter(profile =>
+        this.filteredProfiles = this.ProfilesList.filter(profile =>
             profile.username.toLowerCase().includes(lowerCaseSearchText) ||
             profile.email.toLowerCase().includes(lowerCaseSearchText) ||
             profile.badges.toString().includes(lowerCaseSearchText)
@@ -168,7 +205,6 @@ export class AppComponent implements OnInit {
    return Math.ceil(this.filteredProfiles.length / this.fetchPages);
  }
 
- // Generate an array of page numbers for pagination links
  get pageNumbers() {
    const pages = [];
    for (let i = 1; i <= this.totalPages; i++) {
@@ -177,9 +213,34 @@ export class AppComponent implements OnInit {
    return pages;
  }
 
- // Navigate to a specific page
+
  goToPage(page: number) {
    this.pg = page;
  }
- //ends the logic for pagination
+
+
+ startCountdown() {
+  this.interval = setInterval(() => {
+    const now = new Date().getTime();
+    const timeLeft = this.eventTime - now;
+
+    this.days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    this.hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    this.minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    this.seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+
+    if (timeLeft < 0) {
+      clearInterval(this.interval);
+      this.days = this.hours = this.minutes = this.seconds = 0;
+    }
+  }, 1000);
+}
+
+ngOnDestroy() {
+  if (this.interval) {
+    clearInterval(this.interval);
+  }
+}
+
 }
