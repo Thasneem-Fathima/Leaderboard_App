@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   filteredProfiles: UserProfile[] = [];
   searchText: string='';
   lastUpdatedDate: string='';
+  prevDate: string='';
 
   days: number = 0;
   hours: number = 0;
@@ -108,7 +109,7 @@ export class AppComponent implements OnInit {
           const profile = profiles[i];
 
           if (profile.badges !== lastBadges || profile.arcade_status !== lastArcadeStatus) {
-            currentRank = i + 1; 
+            currentRank = i + 1;
             lastBadges = profile.badges;
             lastArcadeStatus = profile.arcade_status;
           }
@@ -151,6 +152,9 @@ export class AppComponent implements OnInit {
 
           // Combine date and time
           this.lastUpdatedDate = `${formattedDate}, ${formattedTime}`;
+          const previous = new Date(date);
+          previous.setDate(date.getDate() - 1);
+          this.prevDate = previous.toLocaleDateString('en-GB');
         },
         error => {
           console.error('Error loading build date:', error);
