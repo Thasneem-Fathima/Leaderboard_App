@@ -46,7 +46,7 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+  background: linear-gradient(90deg, #4285f4, #34a853, #fbbc05, #ea4335);
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), 0 0 25px rgba(0, 0, 0, 0.1);
@@ -66,4 +66,8 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.green {
+  color: #34a853;
 }

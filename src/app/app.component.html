@@ -28,19 +28,30 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link active" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#leaderboard">Leaderboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Events</a>
+          <a class="nav-link"
+            href="https://gdg.community.dev/gdg-on-campus-madras-institute-of-technology-chennai-india/">Community</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Resources
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="https://www.instagram.com/p/DAnGLEbNbgz/">Onboarding Guide</a></li>
+            <li><a class="dropdown-item" href="https://gen-ai-tutorials.netlify.app/">GenAI Tutorials</a></li>
+            <li><a class="dropdown-item"
+                href="https://docs.google.com/spreadsheets/d/1XoxkJ4OvDwN44iDJt6EUesfuJIYiBj8Y5vl_sVL_dKk/pubhtml?gid=0&single=true">Syllabus</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Resources</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="https://forms.gle/8fzdaf1Pz2YkBbnA8">Contact</a>
         </li>
       </ul>
     </div>
@@ -157,6 +168,7 @@
           <th>SkillsBoost Profile</th>
           <th>Badges</th>
           <th>Arcade Game Completion Status</th>
+          <th>Swags Eligibility</th>
         </tr>
       </thead>
       <tbody>
@@ -173,6 +185,14 @@
           <td>{{ profile.badges }}</td>
           <td>
             <ng-container *ngIf="profile.arcade_status === 1; else redTick">
+              <span class="status-icon green">&#x2714;</span>
+            </ng-container>
+            <ng-template #redTick>
+              <span class="status-icon red">&#x2718;</span>
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="profile.swag === true; else redTick">
               <span class="status-icon green">&#x2714;</span>
             </ng-container>
             <ng-template #redTick>
