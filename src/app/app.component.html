@@ -1,150 +1,209 @@
+<header class="d-flex align-items-center justify-content-between bg-light p-3">
+  <!-- Left Logo (Visible on all views) -->
+  <img src="assets/gdg.png" alt="GDG Logo" class="header-logo">
 
-<div class="header">
-  <img src="assets/gdglogo.jpeg" alt="Logo">
-</div>
-<!-- <div class="year-icons">
-  <button class="year-icon" style="background-color:#DB4437" >2024extd</button>
-  <button class="year-icon" style="background-color:#F4B400">2024</button>
-  <button class="year-icon" style="background-color:#0F9D58">2023</button>
-</div> -->
+  <!-- Center Title (Hidden on mobile, Full title on medium and larger screens) -->
+  <h1 class="text-center m-0 d-none d-md-block" style="color:#4285F4">
+    Google Developer Groups On Campus <br> Madras Institute of Technology
+  </h1>
 
-<h1 class="top-performers-title" style="color:#4285F4">Gen-AI Study Jam <span>LeaderBoard</span></h1>
+  <!-- Right Logo (Visible on medium and larger screens only) -->
+  <img src="assets/AU.png" alt="AU Logo" class="header-logo d-none d-md-block">
 
-<!-- <div class="top-profiles-container" *ngIf="topProfiles && topProfiles.length > 0">
+  <!-- Simplified Mobile Title (Visible on mobile only) -->
+  <h1 class="text-center m-0 d-md-none" style="color:#4285F4">
+    GDG - MIT
+  </h1>
+</header>
 
-  <ul *ngFor="let profile of swappedProfiles; let i = index" align="center">
-    <div class="profile" [ngClass]="{'highlight-profile': i === 1}">
-      <div class="profile-icon" [style.width]="i === 1 ? '170px' : '100px'"
-         [style.height]="i === 1 ? '170px' : '100px'"
-         [ngStyle]="{
-          'background-color': i === 1 ? '#d4af37' : (i === 0 ? 'silver' : (i === 2 ? '#a97142' : 'transparent'))
-        }">
-      <span>{{ i === 0 ? '2' : (i === 1 ? '1' : (i === 2 ? '3' : '')) }}</span>
+
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Resources</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
     </div>
-      <p>{{ profile.username }}</p>
-      <div class="profile-details">
-        <div class="email-section">
-          <a [href]="'mailto:' + profile.email" target="_blank" rel="noopener noreferrer">
-            <img src="assets/gmail.png" alt="Email" style="width: 30px; height: 30px;" />
-          </a>
-        </div>
-        <div class="skills-section">
-          <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
-            <img src="assets/imageGDG.jpg" alt="SkillsBoostURL" style="width: 30px; height: 30px;" />
-          </a>
-        </div>
-      </div>
-      <p>Badges: {{ profile.badges }}</p>
+  </div>
+</nav>
+
+<div id="carouselExampleCaptions" class="container carousel slide py-5">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/slide-0.png" class="d-block mx-auto w-100 carousel-image" alt="Slide 1">
     </div>
-  </ul>
-</div> -->
-
-<!-- <div *ngIf="topProfiles && topProfiles.length === 0">
-  No top profiles available.
-</div> -->
-
-<!--<div id="countdown-container">
-  <div id="countdown">
-    Ends in: <span>{{ days }}d {{ hours }}h {{ minutes }}m {{ seconds }}s</span>
+    <div class="carousel-item">
+      <img src="assets/slide-2.png" class="d-block mx-auto w-100 carousel-image" alt="Slide 2">
+    </div>
+    <div class="carousel-item">
+      <img src="assets/slide-3.png" class="d-block mx-auto w-100 carousel-image" alt="Slide 3">
+    </div>
   </div>
-</div>-->
-
-
-<!--Search Functionality-->
-<div class="col-md-3 ms-auto" align="center">
-  <div  class="search-container">
-    <input type="text"
-          class="form-control"
-          placeholder="Search"
-          [(ngModel)]="searchText"
-          (input)="filterProfiles()">
-
-    <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">X</button>
-  </div>
-</div>
-
-<!-- Last Updated Date -->
-<p style="background-color: #e0f7fa; color: #0d47a1; padding: 10px; border-radius: 5px;" align="center">
-  <!-- <strong>Leaderboard Update:</strong> Last updated on <strong>{{ prevDate }}, 11:59 PM IST. </strong> -->
-  The GenAI Study Jam is Completed Successfully🎉🎊
-  <br><br>
-  <a
-    href="https://linktr.ee/gdg.mit"
-    target="_blank"
-  >
-  Follow
-  </a>us for the future updates and upcoming events.
-  <!-- <br><br>If your progress hasn't updated yet, please allow up to 24 hours for changes to reflect. For further assistance, feel free to reach out to us. -->
-</p>
-
-<!-- <h2 align="center">Remaining Profiles</h2> -->
-<div class="dropdowncont" align="center">
-  <label for="myDropdown" class="pagedrop">Profiles per page: </label>
-  <select id="myDropdown" (change)="onPageChange($event)">
-    <option value="5">5</option>
-    <option value="15">15</option>
-    <option value="25">25</option>
-    <option value="50">50</option>
-  </select>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 
-<div *ngIf="ProfilesList && ProfilesList.length > 0">
-  <table>
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>SkillsBoostProfile</th>
-        <th>Badges</th>
-        <th>Arcade Game Completion Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- <tr *ngFor="let profile of paginatedProfiles" [ngClass]="{'highlight-row': profile.arcade_status === 1 && profile.badges === 15}"> -->
-      <tr *ngFor="let profile of paginatedProfiles" [ngClass]="{'highlight-row': profile.arcade_status === 1 && profile.badges === 15}">
-        <td>{{ profile.rank }}</td>
-        <td>{{ profile.username }}</td>
-        <td>{{ profile.email }}</td>
-        <td>
-          <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
-            <img src="assets/imageGDG.jpg" alt="SkillsBoostURL" width="25" height="25" />
-          </a>
-        </td>
-        <td>{{ profile.badges }}</td>
-        <td>
-          <ng-container *ngIf="profile.arcade_status === 1; else redTick">
-            <span class="status-icon green">
-              &#x2714;
-            </span>
-          </ng-container>
-          <ng-template #redTick>
-            <span class="status-icon red">
-              &#x2718;
-            </span>
-          </ng-template>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <div class="cont">
-    <button class="prev" (click)="previousPage()" [disabled]="pg === 1">Previous</button>
-      <span *ngFor="let page of pageNumbers">
-        <div  *ngIf="(page > pg - 2 && page < pg + 2) || page === 1 || page === totalPages">
-          <button (click)="goToPage(page)" [class.active]="pg === page" [disabled]="pg === page">{{ page }}</button>
-        </div>
-        <div   *ngIf="page === pg - 2 && pg > 3">...</div>
-        <div  *ngIf="page === pg + 2 && pg < totalPages - 2">...</div>
-      </span>
+<div class="container my-5">
+  <div class="row align-items-center">
+    <!-- Left Section: Image -->
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-4 mb-md-0">
+      <img src="assets/gdg-mit.png" class="img-fluid" alt="GenAI Program Image">
+    </div>
 
-
-    <button class="next" (click)="nextPage()" [disabled]="pg === totalPages">Next</button>
+    <!-- Right Section: Text -->
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <h3>About GenAI Study Jam</h3>
+      <p>
+        The GenAI Study Jam is an immersive experience that dives deep into Generative AI technologies.
+        Explore the concepts, applications, and potential of GenAI, learn about the latest tools, and
+        participate in hands-on sessions to gain practical knowledge. Whether you're a beginner or
+        experienced in AI, this program is designed to elevate your understanding and skills in Generative AI.
+      </p>
+    </div>
   </div>
 </div>
+
+
+<!-- Leaderboard Table with Pagination -->
+<div *ngIf="ProfilesList && ProfilesList.length > 0" class="container my-4" id="leaderboard">
+  <h1 class="genai-heading">GenAI Study Jam Leaderboard</h1>
+
+  <div class="container mt-4">
+    <div class="alert alert-warning p-4" role="alert">
+      <h4 class="alert-heading text-center my-2">⚠️ Important Updates and Reminders ⚠️</h4>
+
+      <br>
+      <p><strong>Leaderboard Status:</strong> The leaderboard is now updated with all badge completions and progress as
+        of
+        Nov 1, 5 pm. Please note that the leaderboard will not be updated further. Check your current standing!</p>
+
+      <p><strong>Swag Eligibility:</strong> Only those who completed the course requirements before Nov 1, 5 pm are
+        eligible for Google goodies. We will reach out to the eligible candidates on Nov 17, 2024. No further updates
+        will
+        be made for swag eligibility.</p>
+
+      <p><strong>Missed the Deadline?</strong> If you didn’t qualify this time, don’t worry—you’ve still gained valuable
+        skills and earned certificates! More campaigns and Study Jams are on the way, so stay connected with us on
+        social
+        media for updates.</p>
+
+      <p><strong>Missing Entry?</strong> If you completed all requirements before the deadline but don’t see your name
+        on
+        the leaderboard, please reach out for assistance.</p>
+    </div>
+  </div>
+
+  <!-- Search Functionality -->
+  <div class="col-12 d-flex justify-content-center mb-3">
+    <div class="search-container d-flex align-items-center">
+      <input type="text" class="form-control me-2" placeholder="Search your name..." [(ngModel)]="searchText"
+        (input)="filterProfiles()">
+      <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">X</button>
+    </div>
+  </div>
+
+  <!-- Pagination Dropdown -->
+  <div class="dropdowncont d-flex align-items-center justify-content-center mb-3">
+    <label for="myDropdown" class="pagedrop me-2">Profiles per page:</label>
+    <select id="myDropdown" class="form-select" (change)="onPageChange($event)">
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th>Rank</th>
+          <th>UserName</th>
+          <th>Email</th>
+          <th>SkillsBoost Profile</th>
+          <th>Badges</th>
+          <th>Arcade Game Completion Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profile of paginatedProfiles"
+          [ngClass]="{'highlight-row': profile.arcade_status === 1 && profile.badges === 15}">
+          <td>{{ profile.rank }}</td>
+          <td>{{ profile.username }}</td>
+          <td>{{ profile.email }}</td>
+          <td>
+            <a [href]="profile.skillsBoostUrl" target="_blank" rel="noopener noreferrer">
+              <img src="assets/imageGDG.jpg" alt="SkillsBoostURL" width="25" height="25" />
+            </a>
+          </td>
+          <td>{{ profile.badges }}</td>
+          <td>
+            <ng-container *ngIf="profile.arcade_status === 1; else redTick">
+              <span class="status-icon green">&#x2714;</span>
+            </ng-container>
+            <ng-template #redTick>
+              <span class="status-icon red">&#x2718;</span>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-center align-items-center mt-3">
+    <button class="btn btn-outline-primary me-2" (click)="previousPage()" [disabled]="pg === 1">
+      Previous
+    </button>
+    <ng-container *ngFor="let page of pageNumbers">
+      <ng-container *ngIf="(page > pg - 2 && page < pg + 2) || page === 1 || page === totalPages">
+        <button class="btn btn-outline-primary mx-1" (click)="goToPage(page)" [class.active]="pg === page"
+          [disabled]="pg === page">{{ page }}</button>
+      </ng-container>
+      <ng-container *ngIf="page === pg - 2 && pg > 3">...</ng-container>
+      <ng-container *ngIf="page === pg + 2 && pg < totalPages - 2">...</ng-container>
+    </ng-container>
+    <button class="btn btn-outline-primary ms-2" (click)="nextPage()" [disabled]="pg === totalPages">
+      Next
+    </button>
+  </div>
+</div>
+
 
 <div *ngIf="ProfilesList && ProfilesList.length === 0">
   No profiles available.
 </div>
-
